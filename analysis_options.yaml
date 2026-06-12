@@ -1,0 +1,92 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.gr.dart"
+    - "**/*.config.dart"
+    - "**/*.mocks.dart"
+
+  errors:
+    invalid_annotation_target: ignore
+
+linter:
+  rules:
+    # -----------------------
+    # STYLE
+    # -----------------------
+    prefer_single_quotes: true
+    require_trailing_commas: true
+    sort_constructors_first: true
+    sort_pub_dependencies: true
+    directives_ordering: true
+
+    # -----------------------
+    # IMMUTABILITY
+    # -----------------------
+    prefer_final_fields: true
+    prefer_final_locals: true
+    prefer_final_in_for_each: true
+    unnecessary_final: false
+
+    # -----------------------
+    # CONST
+    # -----------------------
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_const_declarations: true
+
+    # -----------------------
+    # NULL SAFETY
+    # -----------------------
+    unnecessary_null_checks: true
+
+    # -----------------------
+    # ASYNC
+    # -----------------------
+    unawaited_futures: true
+    discarded_futures: true
+    avoid_void_async: true
+
+    # -----------------------
+    # CLEAN CODE
+    # -----------------------
+    avoid_print: true
+    avoid_unnecessary_containers: true
+    avoid_empty_else: true
+    avoid_redundant_argument_values: true
+    avoid_unused_constructor_parameters: true
+    unnecessary_lambdas: true
+    unnecessary_parenthesis: true
+    unnecessary_string_interpolations: true
+
+    # -----------------------
+    # WIDGETS
+    # -----------------------
+    use_key_in_widget_constructors: true
+    sized_box_for_whitespace: true
+    use_colored_box: true
+
+    # -----------------------
+    # IMPORTS
+    # -----------------------
+    always_use_package_imports: true
+    depend_on_referenced_packages: true
+    implementation_imports: true
+
+    # -----------------------
+    # DOCUMENTATION
+    # -----------------------
+    slash_for_doc_comments: true
+
+    # -----------------------
+    # SAFETY
+    # -----------------------
+    cancel_subscriptions: true
+    close_sinks: true
+
+    # -----------------------
+    # PERFORMANCE
+    # -----------------------
+    avoid_function_literals_in_foreach_calls: true

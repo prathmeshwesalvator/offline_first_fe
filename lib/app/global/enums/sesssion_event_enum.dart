@@ -1,0 +1,1 @@
+enum SesssionEventEnum { initial, unauthorized }
