@@ -13,9 +13,12 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:offline_first/app/core/database/database.dart' as _i441;
 import 'package:offline_first/app/core/di/register_module.dart' as _i1007;
 import 'package:offline_first/app/core/sharedPreferences/app_shared_preferences.dart'
     as _i549;
+import 'package:offline_first/app/feature/home/data/datasource/local/get_all_products_local_datasource.dart'
+    as _i938;
 import 'package:offline_first/app/feature/home/data/datasource/remote/get_all_products_remote_datasource.dart'
     as _i158;
 import 'package:offline_first/app/feature/home/data/repositories/get_all_products_repository_impl.dart'
@@ -48,10 +51,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => registerModule.flutterSecureStorage,
     );
+    gh.lazySingleton<_i441.AppDatabase>(() => registerModule.appDatabase());
     gh.lazySingleton<_i549.AppSharedPreferences>(
       () => _i549.AppSharedPreferences(
         secureStorage: gh<_i558.FlutterSecureStorage>(),
       ),
+    );
+    gh.lazySingleton<_i938.GetAllProductsLocalDatasource>(
+      () => _i938.GetAllProductsLocalDatasourceImpl(gh<_i441.AppDatabase>()),
     );
     gh.lazySingleton<_i361.Dio>(
       () => registerModule.dio(gh<_i549.AppSharedPreferences>()),
@@ -67,15 +74,17 @@ extension GetItInjectableX on _i174.GetIt {
         productsService: gh<_i142.ProductsService>(),
       ),
     );
+    gh.lazySingleton<_i312.SubmitLoginDatasource>(
+      () => _i312.SubmitLoginDatasourceImpl(
+        submitLoginService: gh<_i505.SubmitLoginService>(),
+      ),
+    );
     gh.lazySingleton<_i216.GetAllProductRepository>(
       () => _i919.GetAllProductsRepositoryImpl(
         getAllProductsRemoteDatasource:
             gh<_i158.GetAllProductsRemoteDatasource>(),
-      ),
-    );
-    gh.lazySingleton<_i312.SubmitLoginDatasource>(
-      () => _i312.SubmitLoginDatasourceImpl(
-        submitLoginService: gh<_i505.SubmitLoginService>(),
+        getAllProductsLocalDatasource:
+            gh<_i938.GetAllProductsLocalDatasource>(),
       ),
     );
     gh.lazySingleton<_i37.GetAllProductsUsecase>(

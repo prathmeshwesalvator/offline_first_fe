@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:offline_first/app/global/app_colors/app_colors.dart';
 
 Widget navItem({
   required BuildContext context,
@@ -8,37 +9,39 @@ Widget navItem({
   required bool isSelected,
   required VoidCallback onTap,
 }) {
-  final colorScheme = Theme.of(context).colorScheme;
-  final textTheme = Theme.of(context).textTheme;
-
-  final activeColor = colorScheme.surfaceBright;
-  final inactiveColor = colorScheme.onSurfaceVariant;
-
   return Material(
     color: Colors.transparent,
-    child: InkResponse(
+    child: InkWell(
+      borderRadius: BorderRadius.circular(16),
       onTap: onTap,
-      radius: 28,
-      splashColor: colorScheme.primary.withOpacity(0.15),
-      highlightColor: colorScheme.primary.withOpacity(0.08),
-      customBorder: const CircleBorder(),
-      child: SizedBox(
-        width: 60,
-        height: 60,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: isSelected
+              ? AppColors.navSelected.withOpacity(.12)
+              : Colors.transparent,
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               isSelected ? (activeIcon ?? icon) : icon,
-              color: isSelected ? activeColor : inactiveColor,
+              color: isSelected
+                  ? AppColors.navSelected
+                  : AppColors.navUnselected,
             ),
 
             const SizedBox(height: 4),
 
             Text(
               label,
-              style: textTheme.labelSmall?.copyWith(
-                color: isSelected ? activeColor : inactiveColor,
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                color: isSelected
+                    ? AppColors.navSelected
+                    : AppColors.navUnselected,
               ),
             ),
           ],

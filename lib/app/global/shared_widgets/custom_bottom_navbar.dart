@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:offline_first/app/global/app_colors/app_colors.dart';
 import 'package:offline_first/app/global/bloc/app_bloc.dart';
 import 'package:offline_first/app/global/bloc/app_event.dart';
 import 'package:offline_first/app/global/shared_widgets/nav_item.dart';
@@ -14,11 +15,11 @@ class CustomBottomNavbar extends StatelessWidget {
     final tabsRouter = AutoTabsRouter.of(context);
 
     return BottomAppBar(
-      height: MediaQuery.sizeOf(context).height * 0.08,
+      height: MediaQuery.sizeOf(context).height * 0.095,
       shape: const CircularNotchedRectangle(),
       notchMargin: 8,
       elevation: 6,
-      color: colorScheme.primary,
+      color: AppColors.navBarBackground,
       surfaceTintColor: colorScheme.surfaceTint,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

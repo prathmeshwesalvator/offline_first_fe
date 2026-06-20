@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:offline_first/app/feature/home/domain/entities/response/product_entity.dart';
 
@@ -15,7 +16,6 @@ class _ProductCardState extends State<ProductCard>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _scaleAnimation;
-  bool _isPressed = false;
 
   @override
   void initState() {
@@ -37,17 +37,14 @@ class _ProductCardState extends State<ProductCard>
   }
 
   Future<void> _onTapDown(TapDownDetails _) async {
-    setState(() => _isPressed = true);
     await _controller.forward();
   }
 
   Future<void> _onTapUp(TapUpDetails _) async {
-    setState(() => _isPressed = false);
     await _controller.reverse();
   }
 
   Future<void> _onTapCancel() async {
-    setState(() => _isPressed = false);
     await _controller.reverse();
   }
 
@@ -70,19 +67,16 @@ class _ProductCardState extends State<ProductCard>
             color: colorScheme.surface,
             border: Border.all(
               color: colorScheme.outlineVariant.withValues(alpha: 0.5),
-              width: 1,
             ),
             boxShadow: [
               BoxShadow(
                 color: colorScheme.shadow.withValues(alpha: 0.06),
                 blurRadius: 24,
-                spreadRadius: 0,
                 offset: const Offset(0, 8),
               ),
               BoxShadow(
                 color: colorScheme.shadow.withValues(alpha: 0.04),
                 blurRadius: 6,
-                spreadRadius: 0,
                 offset: const Offset(0, 2),
               ),
             ],
@@ -229,27 +223,33 @@ class _ImageSection extends StatelessWidget {
         SizedBox(
           height: 200,
           width: double.infinity,
-          child: Image.network(
-            product.thumbnail,
-            height: 200,
-            width: double.infinity,
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(
+          child: ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+            child: CachedNetworkImage(
+              imageUrl: product.thumbnail,
               height: 200,
-              color: colorScheme.surfaceContainerHighest,
-              child: Icon(
-                Icons.image_not_supported_outlined,
-                color: colorScheme.onSurfaceVariant,
-                size: 48,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              memCacheHeight: 400,
+              maxHeightDiskCache: 400,
+              fadeInDuration: const Duration(milliseconds: 250),
+
+              placeholder: (context, url) => ColoredBox(
+                color: colorScheme.surfaceContainerHighest,
+                child: const Center(
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
+
+              errorWidget: (context, url, error) => ColoredBox(
+                color: colorScheme.surfaceContainerHighest,
+                child: Icon(
+                  Icons.image_not_supported_outlined,
+                  color: colorScheme.onSurfaceVariant,
+                  size: 48,
+                ),
               ),
             ),
-            loadingBuilder: (context, child, progress) {
-              if (progress == null) return child;
-              return Container(
-                height: 200,
-                color: colorScheme.surfaceContainerHighest,
-              );
-            },
           ),
         ),
 
