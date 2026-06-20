@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomePageState {
 
- String get succesMessage; String get errorMessage; List<ProductEntity> get products; Blocstatus get loadProductsStatus; int get skip; int get limit;
+ String get succesMessage; String get errorMessage; List<ProductEntity> get products; Blocstatus get loadProductsStatus; int get skip; int get limit; int get total;
 /// Create a copy of HomePageState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $HomePageStateCopyWith<HomePageState> get copyWith => _$HomePageStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomePageState&&(identical(other.succesMessage, succesMessage) || other.succesMessage == succesMessage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other.products, products)&&(identical(other.loadProductsStatus, loadProductsStatus) || other.loadProductsStatus == loadProductsStatus)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.limit, limit) || other.limit == limit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomePageState&&(identical(other.succesMessage, succesMessage) || other.succesMessage == succesMessage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other.products, products)&&(identical(other.loadProductsStatus, loadProductsStatus) || other.loadProductsStatus == loadProductsStatus)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.total, total) || other.total == total));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,succesMessage,errorMessage,const DeepCollectionEquality().hash(products),loadProductsStatus,skip,limit);
+int get hashCode => Object.hash(runtimeType,succesMessage,errorMessage,const DeepCollectionEquality().hash(products),loadProductsStatus,skip,limit,total);
 
 @override
 String toString() {
-  return 'HomePageState(succesMessage: $succesMessage, errorMessage: $errorMessage, products: $products, loadProductsStatus: $loadProductsStatus, skip: $skip, limit: $limit)';
+  return 'HomePageState(succesMessage: $succesMessage, errorMessage: $errorMessage, products: $products, loadProductsStatus: $loadProductsStatus, skip: $skip, limit: $limit, total: $total)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $HomePageStateCopyWith<$Res>  {
   factory $HomePageStateCopyWith(HomePageState value, $Res Function(HomePageState) _then) = _$HomePageStateCopyWithImpl;
 @useResult
 $Res call({
- String succesMessage, String errorMessage, List<ProductEntity> products, Blocstatus loadProductsStatus, int skip, int limit
+ String succesMessage, String errorMessage, List<ProductEntity> products, Blocstatus loadProductsStatus, int skip, int limit, int total
 });
 
 
@@ -62,7 +62,7 @@ class _$HomePageStateCopyWithImpl<$Res>
 
 /// Create a copy of HomePageState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? succesMessage = null,Object? errorMessage = null,Object? products = null,Object? loadProductsStatus = null,Object? skip = null,Object? limit = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? succesMessage = null,Object? errorMessage = null,Object? products = null,Object? loadProductsStatus = null,Object? skip = null,Object? limit = null,Object? total = null,}) {
   return _then(_self.copyWith(
 succesMessage: null == succesMessage ? _self.succesMessage : succesMessage // ignore: cast_nullable_to_non_nullable
 as String,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -70,6 +70,7 @@ as String,products: null == products ? _self.products : products // ignore: cast
 as List<ProductEntity>,loadProductsStatus: null == loadProductsStatus ? _self.loadProductsStatus : loadProductsStatus // ignore: cast_nullable_to_non_nullable
 as Blocstatus,skip: null == skip ? _self.skip : skip // ignore: cast_nullable_to_non_nullable
 as int,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String succesMessage,  String errorMessage,  List<ProductEntity> products,  Blocstatus loadProductsStatus,  int skip,  int limit)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String succesMessage,  String errorMessage,  List<ProductEntity> products,  Blocstatus loadProductsStatus,  int skip,  int limit,  int total)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomePageState() when $default != null:
-return $default(_that.succesMessage,_that.errorMessage,_that.products,_that.loadProductsStatus,_that.skip,_that.limit);case _:
+return $default(_that.succesMessage,_that.errorMessage,_that.products,_that.loadProductsStatus,_that.skip,_that.limit,_that.total);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.succesMessage,_that.errorMessage,_that.products,_that.load
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String succesMessage,  String errorMessage,  List<ProductEntity> products,  Blocstatus loadProductsStatus,  int skip,  int limit)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String succesMessage,  String errorMessage,  List<ProductEntity> products,  Blocstatus loadProductsStatus,  int skip,  int limit,  int total)  $default,) {final _that = this;
 switch (_that) {
 case _HomePageState():
-return $default(_that.succesMessage,_that.errorMessage,_that.products,_that.loadProductsStatus,_that.skip,_that.limit);case _:
+return $default(_that.succesMessage,_that.errorMessage,_that.products,_that.loadProductsStatus,_that.skip,_that.limit,_that.total);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +197,10 @@ return $default(_that.succesMessage,_that.errorMessage,_that.products,_that.load
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String succesMessage,  String errorMessage,  List<ProductEntity> products,  Blocstatus loadProductsStatus,  int skip,  int limit)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String succesMessage,  String errorMessage,  List<ProductEntity> products,  Blocstatus loadProductsStatus,  int skip,  int limit,  int total)?  $default,) {final _that = this;
 switch (_that) {
 case _HomePageState() when $default != null:
-return $default(_that.succesMessage,_that.errorMessage,_that.products,_that.loadProductsStatus,_that.skip,_that.limit);case _:
+return $default(_that.succesMessage,_that.errorMessage,_that.products,_that.loadProductsStatus,_that.skip,_that.limit,_that.total);case _:
   return null;
 
 }
@@ -211,7 +212,7 @@ return $default(_that.succesMessage,_that.errorMessage,_that.products,_that.load
 
 
 class _HomePageState implements HomePageState {
-  const _HomePageState({this.succesMessage = '', this.errorMessage = '', final  List<ProductEntity> products = const [], this.loadProductsStatus = Blocstatus.initial, this.skip = 0, this.limit = 0}): _products = products;
+  const _HomePageState({this.succesMessage = '', this.errorMessage = '', final  List<ProductEntity> products = const [], this.loadProductsStatus = Blocstatus.initial, this.skip = 0, this.limit = 0, this.total = 0}): _products = products;
   
 
 @override@JsonKey() final  String succesMessage;
@@ -226,6 +227,7 @@ class _HomePageState implements HomePageState {
 @override@JsonKey() final  Blocstatus loadProductsStatus;
 @override@JsonKey() final  int skip;
 @override@JsonKey() final  int limit;
+@override@JsonKey() final  int total;
 
 /// Create a copy of HomePageState
 /// with the given fields replaced by the non-null parameter values.
@@ -237,16 +239,16 @@ _$HomePageStateCopyWith<_HomePageState> get copyWith => __$HomePageStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomePageState&&(identical(other.succesMessage, succesMessage) || other.succesMessage == succesMessage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.loadProductsStatus, loadProductsStatus) || other.loadProductsStatus == loadProductsStatus)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.limit, limit) || other.limit == limit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomePageState&&(identical(other.succesMessage, succesMessage) || other.succesMessage == succesMessage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.loadProductsStatus, loadProductsStatus) || other.loadProductsStatus == loadProductsStatus)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.total, total) || other.total == total));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,succesMessage,errorMessage,const DeepCollectionEquality().hash(_products),loadProductsStatus,skip,limit);
+int get hashCode => Object.hash(runtimeType,succesMessage,errorMessage,const DeepCollectionEquality().hash(_products),loadProductsStatus,skip,limit,total);
 
 @override
 String toString() {
-  return 'HomePageState(succesMessage: $succesMessage, errorMessage: $errorMessage, products: $products, loadProductsStatus: $loadProductsStatus, skip: $skip, limit: $limit)';
+  return 'HomePageState(succesMessage: $succesMessage, errorMessage: $errorMessage, products: $products, loadProductsStatus: $loadProductsStatus, skip: $skip, limit: $limit, total: $total)';
 }
 
 
@@ -257,7 +259,7 @@ abstract mixin class _$HomePageStateCopyWith<$Res> implements $HomePageStateCopy
   factory _$HomePageStateCopyWith(_HomePageState value, $Res Function(_HomePageState) _then) = __$HomePageStateCopyWithImpl;
 @override @useResult
 $Res call({
- String succesMessage, String errorMessage, List<ProductEntity> products, Blocstatus loadProductsStatus, int skip, int limit
+ String succesMessage, String errorMessage, List<ProductEntity> products, Blocstatus loadProductsStatus, int skip, int limit, int total
 });
 
 
@@ -274,7 +276,7 @@ class __$HomePageStateCopyWithImpl<$Res>
 
 /// Create a copy of HomePageState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? succesMessage = null,Object? errorMessage = null,Object? products = null,Object? loadProductsStatus = null,Object? skip = null,Object? limit = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? succesMessage = null,Object? errorMessage = null,Object? products = null,Object? loadProductsStatus = null,Object? skip = null,Object? limit = null,Object? total = null,}) {
   return _then(_HomePageState(
 succesMessage: null == succesMessage ? _self.succesMessage : succesMessage // ignore: cast_nullable_to_non_nullable
 as String,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -282,6 +284,7 @@ as String,products: null == products ? _self._products : products // ignore: cas
 as List<ProductEntity>,loadProductsStatus: null == loadProductsStatus ? _self.loadProductsStatus : loadProductsStatus // ignore: cast_nullable_to_non_nullable
 as Blocstatus,skip: null == skip ? _self.skip : skip // ignore: cast_nullable_to_non_nullable
 as int,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as int,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

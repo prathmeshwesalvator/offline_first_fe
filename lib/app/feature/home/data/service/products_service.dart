@@ -10,5 +10,8 @@ abstract class ProductsService {
 
   @GET('/products')
   @RequestAnnotations.requestTypeA
-  Future<ProductResponse> getAllProducts();
+  Future<ProductResponse> getAllProducts({
+    @Query('limit') required int limit,
+    @Query('skip') required int skip,
+  });
 }

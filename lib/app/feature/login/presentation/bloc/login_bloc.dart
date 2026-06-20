@@ -5,6 +5,7 @@ import 'package:offline_first/app/feature/login/domain/usecases/submit_login_use
 import 'package:offline_first/app/feature/login/presentation/bloc/login_event.dart';
 import 'package:offline_first/app/feature/login/presentation/bloc/login_state.dart';
 import 'package:offline_first/app/global/enums/blocstatus.dart';
+import 'package:offline_first/app/global/extensions/duration_extension.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required this.submitLoginUsecase}) : super(const LoginState()) {
@@ -51,13 +52,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           ),
         );
       },
-      (r) {
+      (r) async {
         emit(
           state.copyWith(
             loginStatus: Blocstatus.success,
             succesMessage: 'Welcome ${r.firstName} ${r.lastName}',
           ),
         );
+
+        await Future.delayed(1.seconds);
 
         emit(
           state.copyWith(

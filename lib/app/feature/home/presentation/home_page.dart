@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,12 +21,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
+  int _skip = 0;
+  static const int _limit = 10;
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<HomePageBloc>().add(LoadAllProducts(limit: 10, skip: 0));
+      context.read<HomePageBloc>().add(
+        LoadAllProducts(limit: _limit, skip: _skip),
+      );
     });
 
     _scrollController.addListener(_onScroll);
@@ -37,9 +43,22 @@ class _HomePageState extends State<HomePage> {
     final currentScroll = _scrollController.position.pixels;
 
     const threshold = 200; // px before bottom
+    final bloc = context.read<HomePageBloc>();
+
+    final state = bloc.state;
+
+    if (state.loadProductsStatus == Blocstatus.loadMore ||
+        state.loadProductsStatus == Blocstatus.loading ||
+        state.total <= state.products.length) {
+      log('it is returning');
+      return;
+    }
 
     if (currentScroll >= maxScroll - threshold) {
-      context.read<HomePageBloc>().add(LoadAllProducts(limit: 10, skip: 10));
+      _skip += _limit;
+      context.read<HomePageBloc>().add(
+        LoadAllProducts(limit: _limit, skip: _skip),
+      );
     }
   }
 
@@ -50,8 +69,9 @@ class _HomePageState extends State<HomePage> {
         final bool isLoading = state.loadProductsStatus == Blocstatus.loading;
         return RefreshIndicator(
           onRefresh: () async {
+            _skip = 0;
             context.read<HomePageBloc>().add(
-              LoadAllProducts(limit: 10, skip: 0),
+              LoadAllProducts(limit: _limit, skip: _skip),
             );
           },
           child: Skeletonizer(
@@ -69,7 +89,7 @@ class _HomePageState extends State<HomePage> {
         );
       },
       listener: (context, state) {
-        if (state.loadProductsStatus == Blocstatus.success) {
+        if (state.loadProductsStatus == Blocstatus.success && state.skip < 0) {
           CustomToastMessage(
             message: 'Products Loaded Successfully',
           ).showToast(context);

@@ -6,28 +6,24 @@ import 'package:offline_first/app/feature/home/data/models/product_response.dart
 import 'package:offline_first/app/feature/home/data/service/products_service.dart';
 import 'package:offline_first/app/feature/home/domain/entities/request/product_request_entity.dart';
 
-abstract class GetAllProductsRemoteDatasource {
+abstract class GetAllProductsLocalDatasource {
   Future<ProductResponse> call({
     required UsecaseRequestModel<ProductRequestEntity> usecaseRequestModel,
   });
 }
 
-@LazySingleton(as: GetAllProductsRemoteDatasource)
-class GetAllProductsRemoteDatasourceImpl
-    implements GetAllProductsRemoteDatasource {
-  GetAllProductsRemoteDatasourceImpl({required this.productsService});
+@LazySingleton(as: GetAllProductsLocalDatasource)
+class GetAllProductsLocalDatasourceImpl
+    implements GetAllProductsLocalDatasource {
+  GetAllProductsLocalDatasourceImpl();
 
-  final ProductsService productsService;
 
   @override
-  Future<ProductResponse> call({
+  Future<List<Product>> call({
     required UsecaseRequestModel<ProductRequestEntity> usecaseRequestModel,
   }) async {
     try {
-      final response = await productsService.getAllProducts(
-        limit: usecaseRequestModel.data?.limit ?? 30,
-        skip: usecaseRequestModel.data?.skip ?? 0,
-      );
+      final response = await 
 
       return response;
     } catch (e) {

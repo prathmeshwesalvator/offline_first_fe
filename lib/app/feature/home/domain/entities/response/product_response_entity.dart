@@ -1,4 +1,4 @@
-import 'package:offline_first/app/feature/home/domain/entities/product_entity.dart';
+import 'package:offline_first/app/feature/home/domain/entities/response/product_entity.dart';
 
 class ProductResponseEntity {
   ProductResponseEntity({

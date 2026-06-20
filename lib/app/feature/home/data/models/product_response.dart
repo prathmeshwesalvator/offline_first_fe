@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:offline_first/app/feature/home/domain/entities/dimension_entity.dart';
-import 'package:offline_first/app/feature/home/domain/entities/meta_entity.dart';
-import 'package:offline_first/app/feature/home/domain/entities/product_entity.dart';
-import 'package:offline_first/app/feature/home/domain/entities/product_response_entity.dart';
-import 'package:offline_first/app/feature/home/domain/entities/review_entity.dart';
+import 'package:offline_first/app/feature/home/domain/entities/response/dimension_entity.dart';
+import 'package:offline_first/app/feature/home/domain/entities/response/meta_entity.dart';
+import 'package:offline_first/app/feature/home/domain/entities/response/product_entity.dart';
+import 'package:offline_first/app/feature/home/domain/entities/response/product_response_entity.dart';
+import 'package:offline_first/app/feature/home/domain/entities/response/review_entity.dart';
 
 part 'product_response.g.dart';
 

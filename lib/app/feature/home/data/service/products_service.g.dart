@@ -20,9 +20,12 @@ class _ProductsService implements ProductsService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ProductResponse> getAllProducts() async {
+  Future<ProductResponse> getAllProducts({
+    required int limit,
+    required int skip,
+  }) async {
     final _extra = <String, dynamic>{'requestType': 'TYPE_A'};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'limit': limit, r'skip': skip};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ProductResponse>(
